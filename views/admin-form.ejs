@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <tile><%= title %></title>
+        <link rel="stylesheet" href="stylesheets/styles.css" />
+    </head>
+    <body>
+        <% if (typeof user !== "undefined" && user && user.isMember === true) { %>
+            <form method="POST" action="">
+                <label for="accesscode">Access code</label>
+                <input type="text" id="accesscode" name="accesscode" required="truw" />
+                <button>Submit</button>
+            </form>
+        <% } %>
+    </body>
+</html>

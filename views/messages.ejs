@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='stylesheets/style.css' />
+</head>
+<body>
+    
+    <% if (typeof user !== "undefined" && user && user.isAdmin === true) { %>
+        <h1> Welcome <%= user.username %></h1>
+        <p>Chat around!</p>
+
+        <a href="/messages/create">Send a message</a>
+        <br>
+        <a href="/log-out">Log out</a>
+        <% if (typeof messages !== "undefined" && messages && messages.length > 0) { %>
+
+            <div>
+                <% for (let i = messages.length - 1 ; i >= 0 ;  i--) { %>
+                    <div>
+                        <p><%= messages[i].sender.username %></p>
+                        <p><%= messages[i].timestamp %></p>
+                        <p><%= messages[i].text%></p>
+                        <form method="POST" action="/messages/delete">
+                            <input type="hidden" id="messageid" name="messageid" value="<%= messages[i]._id %>">
+                            <button>Delete</button>
+                        </form>
+
+                    </div>
+                <% } %>
+            </div>
+        <% } else { %>
+        <p>No messages yet. Send one!</p>
+        <% } %>
+
+    <% } else if (typeof user !== "undefined" && user && user.isMember === true && user.isAdmin === false) { %>
+        <h1> Welcome <%= user.username %></h1>
+        <p>Chat around!</p>
+
+        <a href="/messages/create">Send a message</a>
+        <br>
+        <a href="/log-out">Log out</a>
+        <% if (typeof messages !== "undefined" && messages && messages.length > 0) { %>
+
+            <div>
+                <% for (let i = messages.length - 1 ; i >= 0 ;  i--) { %>
+                    <div>
+                        <p><%= messages[i].sender.username %></p>
+                        <p><%= messages[i].timestamp %></p>
+                        <p><%= messages[i].text%></p>
+                    </div>
+                <% } %>
+            </div>
+        <% } else { %>
+        <p>No messages yet. Send one!</p>
+        <% } %>
+
+    <% } else if (typeof user !== "undefined" && user && user.isMember === false) { %>
+
+        <h1> Welcome <%= user.username %></h1>
+        <p>Chat around!</p>
+
+        <a href="/messages/create">Send a message</a>
+        <br>
+        <a href="/member">Become a member</a>
+        <br>
+        <a href="/log-out">Log out</a>
+        <% if (typeof messages !== "undefined" && messages && messages.length > 0) { %>
+
+            <div>
+                <% for (let i = 0 ; i < messages.length ; i++) { %>
+                    <div>
+                        <p><%= messages[i].sender.username %></p>
+                        <p><%= messages[i].text%></p>
+                    </div>
+                <% } %>
+            </div>
+        <% } else { %>
+        <p>No messages yet. Send one!</p>
+        <% } %>
+
+    <% }  else { %>
+
+            <h2>Log in to see more messages!</h2>
+            <a href="/">Log in</a>
+
+            <div>
+                <% for (let i = Math.floor(messages.length / 2) ; i >= 0 ; i--) { %>
+                    <p>anon</p>
+                    <p><%= messages[i].text %></p>
+                <% } %>
+            </div>
+
+        <% } %>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> <%= title %> </title>
+        <link rel="stylesheet" href="/stylesheets/styles.css" />
+    </head>
+    <body>
+        
+        <% if (typeof user !== "undefined" && user) { %>
+        <h1> <%= title %>, <%= user.username %> </h1>
+
+        <form method="POST" action="">
+            <label for="secretpass">Secret code</label>
+            <input type="text" id="secretpass" name="secretpass" required="true">
+            <button>Submit</button>
+        </form>
+        <a href="/messages">Return to messages</a>
+        <br>
+
+        <% if (typeof errors !== "undefined" && errors && errors.length > 0) { %>
+            <% for (let i = 0 ; i < errors.length ; i++) { %>
+                <p> <%= errors[i].msg %></p>
+            <% } %>
+        <% } %>
+        <% } else { %>
+        <h1>Log in to become a member</h1>
+        <% } %>
+
+        <a href="/">Home</a>
+    </body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <form method="POST" action="">
+        
+        <div>
+            <label for="firstname">First name</label>
+            <input type="text" id="firstname" name="firstname" required="true">
+        </div>
+
+        <div>
+            <label for="familyname">Surname</label>
+            <input type="text" id="familyname" name="familyname" required="true">
+        </div>
+
+        <div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required="true">
+        </div>
+
+        <div>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required="true">
+        </div>
+
+        <div>
+            <label for="confirmpassword">Confirm Password</label>
+            <input type="password" id="confirmpassword" name="confirmpassword" required="true">
+        </div>
+
+        <button>Sign up</button>
+    </form>
+
+    <% if (typeof errors !== "undefined" && errors && errors.length > 0) { %>
+        <div>
+            <% for (let i = 0 ; i < errors.length ; i++) { %>
+            <p><%= errors[i].msg %></p>
+            <% } %>
+        </div>
+    <% } %>
+
+    <% if (typeof user !== "undefined" && user) {%>
+        <div>
+            <p><%= user.username %> already exists. Please try another one</p>
+        </div>
+    <% } %>
+
+    <a href="/">Log in</a>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> <%= title %> </title>
+        <link rel='stylesheet' href='/stylesheets/styles.css' />
+    </head>
+    <body>
+        
+        <% if (typeof user !== "undefined" && user) { %>
+
+        <h1> <%= title %>, <%= user.username%> </h1>
+
+        <form method="POST" action="">
+            <input type="text" id="message" name="message"  placeholder="What's new?" required="true">
+            <button>Send</button>
+        </form>
+
+        <% if (typeof errors !== "undefined" && errors && errors.length > 0) { %>
+            <% for (let i = 0 ; i < errors.length ; i++) { %>
+                <p> <%= errors[i].msg %></p>
+            <% } %>
+        <% } %>
+
+        <% } else { %>
+        <h2>You're not logged in.</h2>
+        <a href="/">Log in</a>
+        <% } %>
+
+    </body>
+</html>
